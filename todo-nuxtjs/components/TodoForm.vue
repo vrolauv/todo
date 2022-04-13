@@ -2,16 +2,22 @@
   <div>
     <hr />
     <div>
-      current route: {{ currentRouteName }}
       <form @submit.prevent="onCreateItem">
         <label for="">Item</label>
         <input type="text" name="item" v-model="item" />
         <label for="">Description</label>
         <input type="text" name="description" v-model="description" />
         <button type="submit">
-          {{ currentRouteName === "items" ? "Submit" : "Update" }}
+          {{ currentRouteName === "items" ? "Add New" : "Update" }}
         </button>
       </form>
+      <br />
+      <button
+        @click="deleteItem"
+        v-show="currentRouteName === 'items' ? false : true"
+      >
+        Delete
+      </button>
     </div>
   </div>
 </template>
@@ -43,12 +49,20 @@
               console.log(response);
             });
         } else {
+          //Update item
           this.$axios
             .put(`http://127.0.0.1:8000/api/items/${this.id}`, payload)
             .then((response) => {
               console.log(response);
             });
         }
+      },
+      deleteItem() {
+        this.$axios
+          .delete(`http://127.0.0.1:8000/api/items/${this.id}`)
+          .then((response) => {
+            console.log(response);
+          });
       },
     },
   };
