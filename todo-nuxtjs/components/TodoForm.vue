@@ -47,6 +47,7 @@
             .post("http://127.0.0.1:8000/api/items/", payload)
             .then((response) => {
               console.log(response);
+              //this.$router.push("/items");
             });
         } else {
           //Update item
@@ -54,6 +55,7 @@
             .put(`http://127.0.0.1:8000/api/items/${this.id}`, payload)
             .then((response) => {
               console.log(response);
+              this.$router.push("/items");
             });
         }
       },
@@ -62,6 +64,7 @@
           .delete(`http://127.0.0.1:8000/api/items/${this.id}`)
           .then((response) => {
             console.log(response);
+            this.$router.push("/items");
           });
       },
     },
